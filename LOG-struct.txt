@@ -1,0 +1,22 @@
+{ LOG
+	'07.05.2023': [
+		{'time': '22:07:28', 'id': None}
+	]
+}
+
+{ NORMALIZE_LOG
+	'07.05.2023': {
+		None: ['22:07:28'], 
+		'ДЮ-217993': ['7:41:03', '21:15:09']
+	}
+}
+
+[{
+	worker: 'ДЮ-9123',
+	date: datetime.date(),
+	is_day: 'Day',
+	count_events_all: 98,
+	count_events_abort_morn: 5,
+	count_events_abort_even: 2,
+	
+}, {}, {}]
