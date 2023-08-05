@@ -20,7 +20,7 @@ import dearpygui.demo as demo
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-DEFAULT_DATE = config['APP']['DEFAULT_DATE']
+DEFAULT_DATE = datetime.datetime.now().strftime("%d.%m.%Y")
 MID_DAY_HOUR = int(config['APP']['MID_DAY_HOUR'])
 DRIVER_PATH = config['APP']['DRIVER_PATH']
 LOG_PATH = config['APP']['LOG_PATH']
