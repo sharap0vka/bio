@@ -2,6 +2,7 @@ import dearpygui.dearpygui as dpg
 import datetime
 import re
 import os
+import os.path
 import json
 import configparser
 from time import sleep
@@ -588,6 +589,10 @@ def save_log(shop, norm_log):
         with open(f"./logs/{shop}_{date}.json", 'w') as fh:
             json.dump(norm_log[date], fh) 
 
+def check_file_exsist(file_name):
+    if os.path.exists(f"{LOG_PATH}/{file_name}.log"):
+        os.remove(f"{LOG_PATH}/{file_name}.log")
+    
 def find(sender, data):
     log.clear()
     BUFFER.clear()
@@ -595,8 +600,9 @@ def find(sender, data):
         dpg.add_loading_indicator(pos=(120, 50))
         dpg.add_text('Загружаем лог...', pos=(90, 120))
     query = Query(dpg.get_value('input_shop'), set_events())
-    start_chrome(DRIVER_PATH, query.shop, query.events, query.get_start_date(), query.get_end_date())
     FILENAME = f'Bio_FingerLogs_{query.shop}_{query.get_start_date().strftime("%Y.%m.%d")}-{query.get_end_date().strftime("%Y.%m.%d")}'
+    check_file_exsist(FILENAME)
+    start_chrome(DRIVER_PATH, query.shop, query.events, query.get_start_date(), query.get_end_date())
     parse_file(FILENAME, query.events)
     norm_log = normalize_log()
     resp = Response(query.events, norm_log)
